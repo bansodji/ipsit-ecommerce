@@ -41,7 +41,7 @@ function App() {
   return (
     <ThemeProvider theme={light}>
       <GlobalStyle />
-      <Header />
+      <Header />      
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/home" element={<Home />} />

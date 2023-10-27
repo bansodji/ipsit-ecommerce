@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Product from './Product';
 import { useAllProductContext } from '../context/allproductContext';
+import ISkeleton from './ISkeleton';
 
 const Wrapper = styled.section`
 
@@ -28,7 +29,7 @@ const AllProducts = () => {
     }, []);
 
     if (isLoading) {
-        <h1>Loading...</h1>
+        <ISkeleton ItemCount={6}/>
     }
     else {
         return (

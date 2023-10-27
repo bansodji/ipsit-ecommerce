@@ -7,6 +7,8 @@ import { HiMinus, HiPlus } from "react-icons/hi";
 import { FullButtonSolid, RatingButton } from '../components/Buttons';
 import { DiscountDetails, ProductColors } from '../components/Data';
 import TrendingItems from '../components/TrendingItems';
+import ISkeleton from '../components/ISkeleton';
+import { PSkeleton } from '../components/ISkeleton';
 
 
 
@@ -156,7 +158,14 @@ const SingleProduct = () => {
 
     // Conditional rendering: Display content only when 'product' has a value
     if (Object.keys(product).length === 0) {
-        return <h1>Loading product...</h1>;
+        return (
+            <>
+                <div className="mt-4"></div>
+                <PSkeleton />
+                <div className="mt-5"></div>
+                <ISkeleton ItemCount={6} />
+            </>
+        );
     }
     else {
         return (
