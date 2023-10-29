@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import SearchBox from '../components/SearchBox';
-import { IoCameraOutline, IoImageOutline } from "react-icons/io5";
+import { IoCameraOutline, IoImageOutline, IoSearchOutline, IoMicOutline } from "react-icons/io5";
 import { Button1 } from '../components/Buttons';
 import { MostSearchedItemData } from '../components/Data';
 import { MdDeblur } from "react-icons/md";
@@ -9,6 +8,10 @@ import { FaCubes } from "react-icons/fa6";
 import { SlSocialTumblr } from "react-icons/sl";
 import { FcSignature, FcVoicemail } from "react-icons/fc";
 import ExtraProductBox from '../components/ExtraProductBox';
+import axios from "axios";
+import Product from '../components/Product';
+
+let API = "https://dummyjson.com/products/search";
 
 const SearchPageWrapper = styled.section`
     width: 100%;
@@ -100,14 +103,136 @@ const SearchPageWrapper = styled.section`
 const SearchBarContainer = styled.div`
     width: 100%;
     background-color: #fff;
-    position: absolute;
+    position: fixed;
     top: 0;
+    z-index: 1;
+
+    .search-box{
+        width: 100%;
+        height: 40px;
+        border: 1px solid ${({ theme }) => theme.colors.lightBorder};
+        display: flex;
+        align-items: center;
+        border-radius: 20px;
+        padding: 4px 10px;
+        box-shadow: ${({ theme }) => theme.other.boxShadow};
+
+        input{
+          width: 100%;
+          height: 38px;
+          border: none;
+          outline:none;
+          border-radius: 20px;
+          font-weight: 300;
+        
+          &::placeholder {
+            color: ${({ theme }) => theme.colors.grey};
+            opacity: 1; /* Firefox */
+          }
+        }
+    
+        svg{
+          color: ${({ theme }) => theme.colors.grey};
+          font-size:1.2rem;
+          margin: 0 5px;
+        }
+    }
 `;
 
 const SearchPage = () => {
+    const [searchTerm, setSearchTerm] = useState("");
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        // Use useEffect to make the axios request when searchTerm changes
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(API + `?skip=0&limit=10&q=${searchTerm}`);
+                setProducts(res.data.products);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+
+        // Debounce the fetchData function to reduce the number of requests
+        const debounce = setTimeout(fetchData, 500); // Adjust the delay as needed
+
+        // Clean up the timeout to prevent multiple requests
+        return () => clearTimeout(debounce);
+    }, [searchTerm]);
+
+    const handleInputChange = (event) => {
+        const value = event.target.value;
+        setSearchTerm(value);
+    }
+
     return (
         <SearchPageWrapper className='py-3'>
-            <SearchBar />
+            <SearchBarContainer className='py-3'>
+                <div className="container">
+                    <div className='search-box'>
+                        <IoSearchOutline />
+                        <input
+                            onChange={handleInputChange}
+                            value={searchTerm}
+                            className='ms-2'
+                            type="text"
+                            placeholder='Search for brands and products'
+                        />
+                        <IoCameraOutline />
+                        <IoMicOutline />
+                    </div>
+                </div>
+            </SearchBarContainer>
+            {
+                (searchTerm != "")?< SearchSection products={products}/>:<ExtraSearchSection />                
+            }
+        </SearchPageWrapper>
+    );
+}
+
+const SearchSection = ({ products }) => {
+    const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 576);
+    useEffect(() => {
+        // Add a window resize event listener to update the screen size
+        const handleResize = () => {
+            setIsLargeScreen(window.innerWidth > 576);
+        };
+
+        // Attach the event listener
+        window.addEventListener('resize', handleResize);
+
+        // Clean up the event listener on component unmount
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+    return (
+        <div className="container">
+            <span className='mb-4 d-block'>{products.length} search results...</span>
+            <div className={`row ${isLargeScreen ? 'g-4' : 'g-1'}`}>
+                {
+                    products.map((data, index) => (
+                        <Product
+                            key={index}
+                            id={data.id}
+                            thumbnail={data.thumbnail}
+                            title={data.title}
+                            description={data.description}
+                            price={data.price}
+                            rating={data.rating}
+                            category={data.category}
+                        />
+                    ))
+                }
+            </div>
+        </div>
+    );
+}
+
+const ExtraSearchSection = () => {
+    return (
+        <>
             <PhotoSearch />
             <MostSearcheditem />
             <MostSearchedBrands />
@@ -115,17 +240,7 @@ const SearchPage = () => {
                 <h6 className='font-600 uppercase'>Continue Shoping</h6>
             </div>
             <ExtraProductBox />
-        </SearchPageWrapper>
-    );
-}
-
-const SearchBar = () => {
-    return (
-        <SearchBarContainer className='py-3'>
-            <div className="container">
-                <SearchBox />
-            </div>
-        </SearchBarContainer>
+        </>
     );
 }
 
@@ -143,7 +258,7 @@ const PhotoSearch = () => {
                 <div className="col-6">
                     <a className='photo-box'>
                         <i><IoImageOutline /></i>
-                        <span>Click a photo</span>
+                        <span>Select a photo</span>
                     </a>
                 </div>
             </div>
