@@ -114,12 +114,13 @@ const SearchBarContainer = styled.div`
         display: flex;
         align-items: center;
         border-radius: 20px;
-        padding: 4px 10px;
+        padding: 4px 8px;
         box-shadow: ${({ theme }) => theme.other.boxShadow};
 
         input{
           width: 100%;
           height: 38px;
+          padding: 4px;
           border: none;
           outline:none;
           border-radius: 20px;
