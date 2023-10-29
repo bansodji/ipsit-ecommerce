@@ -186,7 +186,7 @@ const SearchPage = () => {
                 </div>
             </SearchBarContainer>
             {
-                (searchTerm != "")?< SearchSection products={products}/>:<ExtraSearchSection />                
+                (searchTerm == "" || products.length == 0 )?<ExtraSearchSection />:< SearchSection products={products}/>                
             }
         </SearchPageWrapper>
     );
@@ -210,7 +210,6 @@ const SearchSection = ({ products }) => {
     }, []);
     return (
         <div className="container">
-            <span className='mb-4 d-block'>{products.length} search results...</span>
             <div className={`row ${isLargeScreen ? 'g-4' : 'g-1'}`}>
                 {
                     products.map((data, index) => (
