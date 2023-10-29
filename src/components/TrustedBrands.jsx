@@ -18,11 +18,11 @@ const Wrapper = styled.section`
     }
 `;
 
-const TrustedBrands = () => {
+const TrustedBrands = (props) => {
     return (
         <Wrapper className='my-5'>
             <div className="container">
-                <h6 className='text-center mb-4'>Trusted by 1000+ brands</h6>
+                <h6 className='text-center mb-4'>{props.title}</h6>
                 <div className="brand-wrapper">                    
                     <div className="brand-logo">
                         <Logo

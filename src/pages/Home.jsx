@@ -12,7 +12,7 @@ const Home = () => {
       <Categories/>
       <FeaturedProducts/>
       <Services/>
-      <TrustedBrands/>
+      <TrustedBrands title="Trusted by 1000+ brands"/>
     </>
   )
 }

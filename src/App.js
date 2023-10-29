@@ -11,6 +11,7 @@ import Category from './pages/Category';
 import ErrorPage from './pages/ErrorPage';
 import TrendingPage from './pages/TrendingPage';
 import SingleProduct from './pages/SingleProduct';
+import SearchPage from './pages/SearchPage';
 
 function App() {
   const light = {
@@ -50,6 +51,7 @@ function App() {
         <Route exact path="/trend" element={<TrendingPage/>} />
         <Route exact path="/user" element={<User/>} />
         <Route exact path="/product" element={<SingleProduct/>} />
+        <Route exact path="/search" element={<SearchPage/>} />
         <Route path="*" element={<ErrorPage/>} />
       </Routes>
       <Footer/>

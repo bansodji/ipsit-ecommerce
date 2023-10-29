@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { IoPersonOutline, IoHeartOutline, IoCartOutline } from "react-icons/io5";
+import { IoPersonOutline, IoHeartOutline, IoCartOutline, IoSearchOutline } from "react-icons/io5";
 import Badge from './Badge';
 import { NavData, NavIcons, NavIconsSolid } from './NavData';
 import BottomNavigation from './BottomNavigation';
@@ -101,6 +101,11 @@ const Header = () => {
             </ul>
             <ul className='d-flex h-100'>
               <li className='me-2 pe-1'>
+                <Link to="/search" className='fs-4'>
+                  <IoSearchOutline />
+                </Link>
+              </li>
+              <li className='mx-2 px-1'>
                 <Badge icon={<IoHeartOutline />} count={0} />
               </li>
               <li className='mx-2 px-1'>
@@ -115,7 +120,7 @@ const Header = () => {
                 {/* <a className='fs-4'>
                   <IoPersonOutline />
                 </a> */}
-                <UserSelectBox/>
+                <UserSelectBox />
               </li>
             </ul>
           </nav>
@@ -126,4 +131,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Header;
