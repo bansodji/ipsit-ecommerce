@@ -27,15 +27,15 @@ const PSkeleton = () => {
     return (
         <div className="container">
             <div className="row g-0">
-                <div className="col-md-1 col-2">
+                {/* <div className="col-md-1 col-2">
                     <Stack spacing={1}>
                         <Skeleton variant="circular" width={40} height={40} />
                         <Skeleton variant="circular" width={40} height={40} />
                         <Skeleton variant="circular" width={40} height={40} />
                         <Skeleton variant="circular" width={40} height={40} />
                     </Stack>
-                </div>
-                <div className="col-md-4 col-10">
+                </div> */}
+                <div className="col-md-5 col-12">
                     <Stack spacing={1}>
                         <Skeleton variant="rectangular" width="100%" height={300} />
                         <Skeleton variant="text" width={210} sx={{ fontSize: '1rem' }} />
