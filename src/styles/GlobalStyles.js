@@ -125,4 +125,9 @@ ul{
 
 .flex-wrap{flex-wrap: wrap;}
 
+.ip-box{
+    background-color:#fff;
+    border-radius: 16px;
+    box-shadow: 0px 0px 41px -8px ${({theme})=>theme.other.boxShadow};
+}
 `;

@@ -33,7 +33,7 @@ const AllProducts = () => {
     }
     else {
         return (
-            <Wrapper className='my-5'>
+            <Wrapper className='mb-5 mt-4'>
                 <div className="container">
                     <div className={`row ${isLargeScreen ? 'g-4' : 'g-1'}`}>
                         {

@@ -7,17 +7,20 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import { BrowserRouter } from 'react-router-dom';
 import { AppProvider } from './context/productcontext';
 import { AllProductProvider } from './context/allproductContext';
+import { CategoryProvider } from './context/categoryContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AllProductProvider>
-      <AppProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </AppProvider>
-    </AllProductProvider>
+    <CategoryProvider>
+      <AllProductProvider>
+        <AppProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </AppProvider>
+      </AllProductProvider>
+    </CategoryProvider>
   </React.StrictMode>
 );
 
