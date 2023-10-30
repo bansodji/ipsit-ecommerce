@@ -33,7 +33,7 @@ const TrendingItems = () => {
     }
     else {
         return (
-            <Wrapper className='my-5'>
+            <Wrapper className='mb-5 mt-4'>
                 <div className="container">
                 <h5 className='font-900 uppercase mb-4'>Trending Products</h5>
                     <div className={`row ${isLargeScreen ? 'g-4' : 'g-1'}`}>
