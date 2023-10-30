@@ -118,7 +118,7 @@ const SearchBarContainer = styled.div`
         box-shadow: ${({ theme }) => theme.other.boxShadow};
 
         input{
-          width: 100%;
+          width: 90%;
           height: 38px;
           padding: 4px;
           border: none;

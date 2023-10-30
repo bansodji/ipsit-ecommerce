@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route   } from 'react-router-dom';
+import React, {useEffect }  from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Header from './components/Header';
 import { ThemeProvider } from 'styled-components';
@@ -38,6 +38,13 @@ function App() {
       sm: "576px",
     }
   }
+
+  const location = useLocation();
+
+  useEffect(() => {
+    // Scroll to the top of the page when navigating to a new route
+    window.scrollTo(0, 0);
+  }, [location]);
 
   return (
     <ThemeProvider theme={light}>

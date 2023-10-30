@@ -10,14 +10,14 @@ export const NavIcons = {
     "home" : <AiOutlineHome />,
     "shop" : <IoBagOutline />,
     "category" : <MdOutlineCategory />,
-    "trend" : <IoPricetagsOutline />
+    "trend" : <IoShirtOutline />
 };
 
 export const NavIconsSolid = {
     "home" : <AiFillHome />,
     "shop" : <IoBag />,
     "category" : <MdCategory />,
-    "trend" : <IoPricetags />
+    "trend" : <IoShirt />
 };
 
 export const UserNavList1Data = {

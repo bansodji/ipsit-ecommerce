@@ -23,3 +23,11 @@ export const MostSearchedItemData = {
     "perfume": "/images/search/perfume.webp",
     "sunglasses": "/images/search/sunglasses.jpg",
 };
+
+export const CategoryData = {
+    "smartphones": "/images/category/phone.jpg",
+    "laptops": "/images/category/laptop.avif",
+    "fragrances": "/images/category/fragrances.jpg",
+    "skincare": "/images/category/fragrances.jpg",
+    "groceries": "/images/category/fragrances.jpg",
+}
