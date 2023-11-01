@@ -23,6 +23,27 @@ const ISkeleton = ({ ItemCount }) => {
     );
 }
 
+const ISkeleton2 = ({ ItemCount }) => {
+    // Create an array of length ItemCount to repeat the Skeleton component
+    const skeletonItems = Array.from({ length: ItemCount }, (_, index) => (
+        <div className="col-lg-4" key={index}>
+            <Stack spacing={1}>
+                <Skeleton variant="rectangular" width="100%" height={150} />
+                <Skeleton variant="text" width={210} sx={{ fontSize: '1rem' }} />
+                <Skeleton variant="text" width={130} sx={{ fontSize: '1rem' }} />
+            </Stack>
+        </div>
+    ));
+
+    return (
+        <div className="container">
+            <div className="row">
+                {skeletonItems}
+            </div>
+        </div>
+    );
+}
+
 const PSkeleton = () => {
     return (
         <div className="container">
@@ -62,5 +83,5 @@ const PSkeleton = () => {
     );
 }
 
-export { PSkeleton };
+export { PSkeleton,ISkeleton2 };
 export default ISkeleton;

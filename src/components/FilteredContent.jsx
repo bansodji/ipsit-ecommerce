@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Product from './Product';
 import { useAllProductContext } from '../context/allproductContext';
-import ISkeleton from './ISkeleton';
+import ISkeleton, { ISkeleton2 } from './ISkeleton';
+import Product2 from './Product2';
 
 const Wrapper = styled.section`
 
 `;
 
-const AllProducts = () => {
+const FilteredContent = ({ content }) => {
     const { isLoading, products } = useAllProductContext();
 
     const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth > 576);
@@ -31,8 +31,34 @@ const AllProducts = () => {
     if (isLoading) {
         return (
             <div className='my-3'> 
-                <ISkeleton ItemCount={6} />
+                <ISkeleton2 ItemCount={24} />
             </div>
+        );
+    }
+    else if (content.length == 0) {
+        return (
+            <Wrapper className='mb-5 mt-3'>
+                <div className="container">
+                    <div className={`row ${isLargeScreen ? 'g-4' : 'g-1'}`}>
+                        {
+                            products.map((data, index) => {
+                                return (
+                                    <Product2
+                                        key={index}
+                                        id={data.id}
+                                        thumbnail={data.thumbnail}
+                                        title={data.title}
+                                        description={data.description}
+                                        price={data.price}
+                                        rating={data.rating}
+                                        category={data.category}
+                                    />
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+            </Wrapper>
         );
     }
     else {
@@ -41,9 +67,9 @@ const AllProducts = () => {
                 <div className="container">
                     <div className={`row ${isLargeScreen ? 'g-4' : 'g-1'}`}>
                         {
-                            products.map((data, index) => {
+                            content.map((data, index) => {
                                 return (
-                                    <Product
+                                    <Product2
                                         key={index}
                                         id={data.id}
                                         thumbnail={data.thumbnail}
@@ -63,4 +89,4 @@ const AllProducts = () => {
     }
 }
 
-export default AllProducts;
+export default FilteredContent;

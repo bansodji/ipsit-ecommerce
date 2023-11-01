@@ -1,11 +1,12 @@
 import React from 'react';
 import AllProducts from '../components/AllProducts';
+import Filters from '../components/Filters';
 
 const Shop = () => {
   return (
     <>
-      <AllProducts />
+      <Filters/>      
     </>
-  )
+  );
 }
 export default Shop;

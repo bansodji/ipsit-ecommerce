@@ -29,7 +29,11 @@ const TrendingItems = () => {
     }, []);
 
     if (isLoading) {
-        <ISkeleton ItemCount={6} />
+        return (
+            <div className='my-3'> 
+                <ISkeleton ItemCount={6} />
+            </div>
+        );
     }
     else {
         return (

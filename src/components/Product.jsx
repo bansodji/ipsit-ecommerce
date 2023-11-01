@@ -124,7 +124,6 @@ const Card = (props) => {
 }
 
 const CardSm = (props) => {
-    console.log(props);
     return (
         <CardSmWrapper>
             <a href={`product?id=${props.id}`} className="img-section">

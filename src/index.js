@@ -8,19 +8,22 @@ import { BrowserRouter } from 'react-router-dom';
 import { AppProvider } from './context/productcontext';
 import { AllProductProvider } from './context/allproductContext';
 import { CategoryProvider } from './context/categoryContext';
+import { FilterProvider } from './context/filterContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <CategoryProvider>
-      <AllProductProvider>
-        <AppProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </AppProvider>
-      </AllProductProvider>
-    </CategoryProvider>
+    <FilterProvider>
+      <CategoryProvider>
+        <AllProductProvider>
+          <AppProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </AppProvider>
+        </AllProductProvider>
+      </CategoryProvider>
+    </FilterProvider>
   </React.StrictMode>
 );
 

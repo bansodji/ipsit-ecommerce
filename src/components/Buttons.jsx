@@ -64,25 +64,45 @@ const RatingButtonWrapper = styled.div`
   font-size: 14px;
 
   .icon{
-    color: ${({theme})=>theme.colors.gold};
+    color: ${({ theme }) => theme.colors.gold};
     margin-left: 2px;
   }
 
   .rate-by{
-    /* color: ${({theme})=>theme.colors.grey}; */
+    /* color: ${({ theme }) => theme.colors.grey}; */
   }
 
   .line{
-    border: 1px solid ${({theme})=>theme.colors.lightBorder};
+    border: 1px solid ${({ theme }) => theme.colors.lightBorder};
     margin: 0 10px;
   }
 
 
 `;
 
+const Button2Container = styled.a`
+    width: auto;
+    height: auto;
+    border: 1px solid ${({ theme }) => theme.colors.lightBorder};
+    border-radius: 20px;
+    outline: none;
+    background: #fff;
+    color: #6a6969;
+    padding: 8px 18px;
+    text-transform: capitalize;
+    font-size: 0.8rem;
+    font-weight: 400;
+`;
+
 const Button1 = (props) => {
   return (
     <Button>{props.name}</Button>
+  );
+}
+
+const Button2 = (props) => {
+  return (
+    <Button2Container data-filter={props.dataFilter}>{props.name}</Button2Container>
   );
 }
 
@@ -111,4 +131,4 @@ const RatingButton = (props) => {
   );
 }
 
-export { Button1, FullButtonOutline, FullButtonSolid, RatingButton };
+export { Button1, Button2, FullButtonOutline, FullButtonSolid, RatingButton };
