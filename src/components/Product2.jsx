@@ -102,7 +102,7 @@ const Card = (props) => {
     return (
         <CardWrapper className='card'>
             <a href={`product?id=${props.id}`} className="img-section">
-                <img src={props.thumbnail} alt="" />
+                <img src={props.thumbnail} alt={props.description} loading="lazy" />
             </a>
             <div className="body-section p-3">
                 <div className='d-flex  justify-content-between mb-2'>
@@ -127,7 +127,7 @@ const CardSm = (props) => {
     return (
         <CardSmWrapper>
             <a href={`product?id=${props.id}`} className="img-section">
-                <img src={props.thumbnail} alt="" />
+                <img src={props.thumbnail} alt={props.description} loading="lazy" />
             </a>
             <div className="body-section p-2">
                 <a href={`product?id=${props.id}`} className='font-500'>
