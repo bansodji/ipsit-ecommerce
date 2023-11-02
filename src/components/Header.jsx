@@ -6,6 +6,7 @@ import Badge from './Badge';
 import { NavData, NavIcons, NavIconsSolid } from './NavData';
 import BottomNavigation from './BottomNavigation';
 import UserSelectBox from './UserSelectBox';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const AppBar = styled.header`
  width: 100%;
@@ -70,8 +71,22 @@ const AppBar = styled.header`
 
 `;
 
+const Button = styled.button`
+    width: auto;
+    height: 35px;
+    border: none;
+    outline: none;
+    background: ${({ theme }) => theme.colors.theme1};
+    color: #fff;
+    padding: 0 10px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 500;
+`;
+
 const Header = () => {
   const location = useLocation();
+  const { loginWithRedirect, logout, isAuthenticated, isLoading } = useAuth0();
 
   return (
     <>
@@ -111,17 +126,29 @@ const Header = () => {
               <li className='mx-2 px-1'>
                 <Badge icon={<IoCartOutline />} count={0} />
               </li>
-              <li className='ms-2 me-0 pe-0 ps-1 mobile-user-icon'>
-                <Link to="/user" className='fs-4'>
-                  <IoPersonOutline />
-                </Link>
-              </li>
-              <li className='ms-2 me-0 pe-0 ps-1 big-user-icon'>
-                {/* <a className='fs-4'>
-                  <IoPersonOutline />
-                </a> */}
-                <UserSelectBox />
-              </li>
+              {
+                (isAuthenticated) ?
+                  <>
+                    <li className='ms-2 me-0 pe-0 ps-1 mobile-user-icon'>
+                      <Link to="/user" className='fs-4'>
+                        <IoPersonOutline />
+                      </Link>
+                    </li>
+                    <li className='ms-2 me-0 pe-0 ps-1 big-user-icon'>
+                      <UserSelectBox />
+                    </li>
+                    {/* <li className='ms-2 me-0 pe-0 ps-1'>
+                      <Button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
+                        Log Out
+                      </Button>
+                    </li> */}
+                  </>
+                  : <li className='ms-2 me-0 pe-0 ps-1'>
+                    <Button onClick={() => loginWithRedirect()}>Log In</Button>
+                  </li>
+              }
+
+
             </ul>
           </nav>
         </div>

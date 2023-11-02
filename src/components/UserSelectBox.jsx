@@ -4,6 +4,7 @@ import { IoPersonOutline } from "react-icons/io5";
 import { UserNavList1Data, UserNavList2Data, UserNavList3Data } from '../components/NavData';
 import { Link } from 'react-router-dom';
 import { LuLogOut } from "react-icons/lu";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const UserSelectBoxWrapper = styled.div`
     position: relative;
@@ -49,6 +50,7 @@ const UserSelectBoxWrapper = styled.div`
 `;
 
 const UserSelectBox = () => {
+    const { logout, isAuthenticated, isLoading, user } = useAuth0();
     const UserNavList1DataKeys = Object.keys(UserNavList1Data);
     const UserNavList2DataKeys = Object.keys(UserNavList2Data);
     return (
@@ -57,7 +59,9 @@ const UserSelectBox = () => {
                 <IoPersonOutline />
             </button>
             <div className="f-dropdown-content title">
-                <a>User Full Name</a>
+                {
+                    isAuthenticated && (<a className='text-unset'>{user.name}</a>)
+                }
                 <hr />
                 {
                     UserNavList1DataKeys.map((data, index) => (
@@ -69,7 +73,11 @@ const UserSelectBox = () => {
                         <Link to={`/${data.replace(/ /g, "")}`} key={index}> {UserNavList2Data[data]} &nbsp;{data}</Link>
                     ))}
                 <hr />
-                <a className='uppercase theme1 font-600'><LuLogOut/>&nbsp; Log out</a>
+                <a
+                    onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+                    className='uppercase theme1 font-600'>
+                    <LuLogOut />&nbsp; Log out
+                </a>
             </div>
         </UserSelectBoxWrapper>
     );

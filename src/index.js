@@ -9,10 +9,17 @@ import { AppProvider } from './context/productcontext';
 import { AllProductProvider } from './context/allproductContext';
 import { CategoryProvider } from './context/categoryContext';
 import { FilterProvider } from './context/filterContext';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <Auth0Provider
+    domain="dev-wt4xy70jwuy6p1zy.us.auth0.com"
+    clientId="GemJjDOOzgbZu4WFkBnBTJrsdLmfiAUb"
+    authorizationParams={{
+      redirect_uri: window.location.origin
+    }}
+  >
     <FilterProvider>
       <CategoryProvider>
         <AllProductProvider>
@@ -24,7 +31,7 @@ root.render(
         </AllProductProvider>
       </CategoryProvider>
     </FilterProvider>
-  </React.StrictMode>
+  </Auth0Provider>
 );
 
 reportWebVitals();

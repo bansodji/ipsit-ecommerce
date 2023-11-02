@@ -4,8 +4,9 @@ import { UserCard1 } from '../components/UserCard';
 import { UserNavList1Data, UserNavList2Data, UserNavList3Data } from '../components/NavData';
 import { Link } from 'react-router-dom';
 import { IoChevronForwardOutline } from "react-icons/io5";
-import { FullButtonOutline } from '../components/Buttons';
+// import { FullButtonOutline } from '../components/Buttons';
 import { LuLogOut } from "react-icons/lu";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const Wrapper = styled.section`
@@ -39,17 +40,40 @@ const LogoutWrapper = styled.div`
 
 `;
 
+const FullButtonOutlineWrapper = styled.button`
+    width: 100% !important;
+    height: 40px;
+    border: 1px solid ${({ theme }) => theme.colors.theme1};
+    outline: none;
+    background: none;
+    color: ${({ theme }) => theme.colors.theme1};
+    padding: 5px 20px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: ${({ theme }) => theme.other.transitionFast};
+
+    &:hover{
+      background-color: ${({ theme }) => theme.colors.theme1};
+      color: #fff;
+    }
+
+    span{
+      font-size: 1.1rem;
+      margin-right: 5px;
+    }
+`;
 
 const User = () => {
-  
+
   return (
     <Wrapper className='p-2 pt-3'>
       <div className="container">
         <UserCard1 />
         <UserNavList1 />
-        <UserNavList2/>
-        <UserNavList3/>
-        <LogoutSection/>
+        <UserNavList2 />
+        <UserNavList3 />
+        <LogoutSection />
       </div>
 
     </Wrapper>
@@ -117,12 +141,17 @@ const UserNavList3 = () => {
 }
 
 const LogoutSection = () => {
-  return(
+  const { logout } = useAuth0();
+  return (
     <LogoutWrapper className='my-4'>
-      <FullButtonOutline icon={<LuLogOut/>} name="Log Out"/>
+      <FullButtonOutlineWrapper
+        onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
+      >
+        <span><LuLogOut /></span>Log Out
+      </FullButtonOutlineWrapper>
     </LogoutWrapper>
   );
 }
 
-export {LogoutSection};
+export { LogoutSection };
 export default User;

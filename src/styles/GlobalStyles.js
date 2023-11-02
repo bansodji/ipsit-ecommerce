@@ -73,6 +73,7 @@ ul{
 .lowercase{text-transform: lowercase}
 
 .title{text-transform: capitalize}
+.text-unset{text-transform:none !important;}
 
 .cursor-pointer{cursor:pointer}
 

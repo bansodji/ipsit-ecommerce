@@ -7,7 +7,7 @@ import { Button2 } from './Buttons';
 
 const FilterWrapper = styled.section`
     .filter-sm{
-        /* display: none; */
+        display: none;
     }
 
     @media(max-width: ${({ theme }) => theme.screen.lg}){

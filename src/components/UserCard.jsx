@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const UserCard1Wrapper = styled.div`
     width: 100%;
@@ -7,7 +8,7 @@ const UserCard1Wrapper = styled.div`
     border-radius: 15px;
     padding: 0.5rem;
     overflow: hidden;
-    background-color: ${({theme})=>theme.colors.theme1c};
+    background-color: ${({ theme }) => theme.colors.theme1c};
 
     .image{
         width: 4rem;
@@ -25,16 +26,23 @@ const UserCard1Wrapper = styled.div`
 `;
 
 const UserCard1 = (props) => {
+    const { user, isAuthenticated, isLoading } = useAuth0();
     return (
         <UserCard1Wrapper className='d-flex align-items-center'>
-            <div className='image'>
-                <img src="/user.jpg" alt="" />
-            </div>
-            <div className='details ps-3 d-flex flex-column justify-content-center'>
-                <h4 style={{lineHeight:'15px'}}>Rachel Weiz</h4>
-                <span style={{lineHeight:'15px', fontSize:'14px'}}>Lorem, ipsum dolor.</span>
-            </div>
-        </UserCard1Wrapper>
+            {
+                isAuthenticated && (
+                    <>
+                        <div className='image'>
+                            <img src={user.picture} alt={user.name} />
+                        </div>
+                        <div className='details ps-3 d-flex flex-column justify-content-center'>
+                            <h4 style={{ lineHeight: '15px' }}>{user.name}</h4>
+                            <span style={{ lineHeight: '15px', fontSize: '14px' }}>{user.email}</span>
+                        </div>
+                    </>
+                )
+            }
+        </UserCard1Wrapper >
     )
 }
 
